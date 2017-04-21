@@ -29,6 +29,7 @@
         "behat/behat": "~3.3",
         "behat/mink": "~1.7",
         "behat/mink-goutte-driver": "~1.2",
+        "drupal/drupal-extension": "~3.0",
         "jcalderonzumba/gastonjs": "~1.0.2",
         "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
         "mikey179/vfsstream": "~1.2",
