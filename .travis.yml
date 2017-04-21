@@ -40,4 +40,4 @@ before_script:
 #  - ./../bin/drupal
 
 script:
-  - ./../bin/behat
+  - ./bin/behat
