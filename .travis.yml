@@ -7,10 +7,10 @@ php:
 
 sudo: false
 
- env:
-   global:
-     - SIMPLETEST_DB=sqlite://tmp/site.sqlite
-     - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
+env:
+  global:
+    - SIMPLETEST_DB=sqlite://tmp/site.sqlite
+    - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
 #   matrix:
 #     - RELEASE=stable COMPOSER_CHANNEL=stable
 #     - RELEASE=dev COMPOSER_CHANNEL=stable
