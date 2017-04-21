@@ -16,4 +16,5 @@ default:
       drush:
         alias: 'local'
       drupal: 
-        drupal_root: './html'
+        drupal_root: './web'
+        
