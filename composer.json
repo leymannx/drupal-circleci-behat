@@ -41,8 +41,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-      "sort-packages": true,
-      "bin-dir": "bin/"
+      "sort-packages": true
     },
     "autoload": {
         "classmap": [
