@@ -1,4 +1,4 @@
-# Composer template for Drupal projects 
+# Composer template for Drupal projects
 
 [![Build Status](https://travis-ci.org/leymannx/d8-multisite-behat-travis.svg?branch=develop)](https://travis-ci.org/leymannx/d8-multisite-behat-travis)
 
