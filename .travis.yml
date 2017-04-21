@@ -25,7 +25,7 @@ before_install:
 install:
   - composer --verbose install
 
-script:
+before_script:
 #  - if [[ $RELEASE = dev ]]; then composer --verbose require --no-update drupal/core:8.4.x-dev; fi;
 #  - if [[ $RELEASE = dev ]]; then composer --verbose update; fi;
   - cd $TRAVIS_BUILD_DIR/web
@@ -35,6 +35,8 @@ script:
   # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
   # Ignore PageCache group temporarily, @see https://www.drupal.org/node/2770673
 #  - ./bin/phpunit -c core --testsuite unit --exclude-group Composer,DependencyInjection,PageCache
-  - ./../bin/drush
-  - ./../bin/drupal
-  - ./../bin/behat
+#  - ./../bin/drush
+#  - ./../bin/drupal
+
+script:
+  - ./bin/behat
