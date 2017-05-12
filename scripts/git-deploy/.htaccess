@@ -1,0 +1,4 @@
+<Files "deploy.log">
+  Order Allow,Deny
+  Deny from all
+</Files>
