@@ -1,4 +1,5 @@
 <?php
+
 // https://github.com/vicenteguerra/git-deploy
 define("TOKEN", "secret-token");
 define("REMOTE_REPOSITORY", "git@github.com:username/custom-project.git");
