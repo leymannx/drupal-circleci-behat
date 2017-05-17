@@ -1,6 +1,7 @@
 # Composer template for Drupal projects
 
 [![Build Status](https://travis-ci.org/leymannx/d8-multisite-behat-travis.svg?branch=develop)](https://travis-ci.org/leymannx/d8-multisite-behat-travis)
+[![CircleCI](https://circleci.com/gh/leymannx/d8-multisite-behat-travis.svg?style=svg)](https://circleci.com/gh/leymannx/d8-multisite-behat-travis)
 
 This project template should provide a kickstart for managing your site
 dependencies with [Composer](https://getcomposer.org/).
