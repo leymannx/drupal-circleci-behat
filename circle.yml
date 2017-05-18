@@ -15,3 +15,4 @@ deployment:
     branch: develop
     commands:
       - ssh ix@89.19.229.211 "cd /var/www/html/d8-test && git pull origin develop"
+      
