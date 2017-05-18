@@ -1,3 +1,4 @@
+## Customize the test machine
 machine:
   php:
     # Default: 5.6.17 @see https://circleci.com/docs/1.0/build-image-trusty/#php
@@ -7,3 +8,10 @@ dependencies:
   pre:
     # Disable Xdebug @see https://circleci.com/docs/1.0/language-php/#xdebug
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+
+# These commands are triggered only after a successful (green) build.
+deployment:
+  dev:
+    branch: develop
+    commands:
+      - ssh ix@89.19.229.211:/var/www/html/d8-test "git pull origin develop"
