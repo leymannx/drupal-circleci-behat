@@ -15,7 +15,9 @@ dependencies:
     # No password is required for the MySQL user `ubuntu`
     - mysql -u ubuntu -e "create database ix_de"
   post:
-    - export PATH=$PATH:$HOME/${CIRCLE_PROJECT_REPONAME}/bin
+    #
+    - echo "export PATH=$PATH:$HOME/${CIRCLE_PROJECT_REPONAME}/bin" >> /home/ubuntu/.bashrc
+    - source /home/ubuntu/.bashrc
     - cd ./web
     - drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='Norman Kämper-Leymann' --account-pass='12 Characters.' --account-mail=nl@cbe-digital.de --site-mail=nl@cbe-digital.de --site-name=d8.dev -y
     - drush en admin_toolbar, admin_toolbar_tools, devel, devel_generate, kint -y && drush pmu contact -y
