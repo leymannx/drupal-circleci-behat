@@ -20,12 +20,10 @@ dependencies:
     #
     - echo "export PATH=$PATH:$HOME/${CIRCLE_PROJECT_REPONAME}/bin" >> /home/ubuntu/.bashrc
     - source /home/ubuntu/.bashrc
-    - cd /home/ubuntu/${CIRCLE_PROJECT_REPONAME}/web
-    - pwd
-    - drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='Norman Kämper-Leymann' --account-pass='12 Characters.' --account-mail=nl@cbe-digital.de --site-mail=nl@cbe-digital.de --site-name=d8.dev -y
-    - drush en admin_toolbar, admin_toolbar_tools, devel, devel_generate, kint -y && drush pmu contact -y
-    - drush config-set system.performance css.preprocess 0 -y
-    - drush config-set system.performance js.preprocess 0 -y
+    - cd ./web && drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='Norman Kämper-Leymann' --account-pass='12 Characters.' --account-mail=nl@cbe-digital.de --site-mail=nl@cbe-digital.de --site-name=d8.dev -y
+    - cd ./web && drush en admin_toolbar, admin_toolbar_tools, devel, devel_generate, kint -y && drush pmu contact -y
+    - cd ./web && drush config-set system.performance css.preprocess 0 -y
+    - cd ./web && drush config-set system.performance js.preprocess 0 -y
 
 # These commands are triggered only after a successful (green) build.
 deployment:
