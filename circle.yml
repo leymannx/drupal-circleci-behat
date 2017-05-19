@@ -15,11 +15,11 @@ dependencies:
     # No password is required for the MySQL user `ubuntu`
     - mysql -u ubuntu -e "create database ix_de"
   post:
-    - cd ./web
-    - ./../bin/drush si standard --db-url=mysql://ubuntu:@localhost/ix_de --account-name='Norman Kämper-Leymann' --account-pass='12 Characters.' --account-mail=nl@cbe-digital.de --site-mail=nl@cbe-digital.de --site-name=d8.dev -y
-    - ./../bin/drush en admin_toolbar, admin_toolbar_tools, devel, devel_generate, kint -y && drush pmu contact -y
-    - ./../bin/drush config-set system.performance css.preprocess 0 -y
-    - ./../bin/drush config-set system.performance js.preprocess 0 -y
+    - cd web/
+    - ../bin/drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='Norman Kämper-Leymann' --account-pass='12 Characters.' --account-mail=nl@cbe-digital.de --site-mail=nl@cbe-digital.de --site-name=d8.dev -y
+    - ../bin/drush en admin_toolbar, admin_toolbar_tools, devel, devel_generate, kint -y && drush pmu contact -y
+    - ../bin/drush config-set system.performance css.preprocess 0 -y
+    - ../bin/drush config-set system.performance js.preprocess 0 -y
 
 # These commands are triggered only after a successful (green) build.
 deployment:
