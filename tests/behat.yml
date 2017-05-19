@@ -1,0 +1,28 @@
+default:
+  suites:
+    default:
+      contexts:
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - FeatureContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      base_url: http://ixde.dev
+    Drupal\DrupalExtension:
+      blackbox: ~
+      region_map:
+        breadcrumb: '#breadcrumb'
+        branding: '#region-branding'
+        branding_second: '#region-branding-second'
+        content: '#region-content'
+        content_zone: '#zone-content'
+        footer_first: '#region-footer-first'
+        footer_second: '#region-footer-second'
+        footer_fourth: '#region-footer-fourth'
+        menu: '#region-menu'
+        page_bottom: '#region-page-bottom'
+        page_top: '#region-page-top'
+        sidebar_first: '#region-sidebar-first'
+        sidebar_second: '#region-sidebar-second'
