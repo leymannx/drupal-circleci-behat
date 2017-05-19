@@ -1,6 +1,6 @@
 # Deploy and test a Drupal 8 multisite with Circle CI and Behat 
 
-[![CircleCI](https://circleci.com/gh/leymannx/d8-multisite-behat-travis.svg?style=svg)](https://circleci.com/gh/leymannx/d8-multisite-behat-travis)
+[![CircleCI](https://circleci.com/gh/leymannx/drupal-circleci-behat.svg?style=svg)](https://circleci.com/gh/leymannx/d8-multisite-behat-travis)
 
 - First I created a new project from https://github.com/drupal-composer/drupal-project
 - Then connected to Circle CI and added a `circle.yml` to the root
