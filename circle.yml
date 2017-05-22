@@ -5,7 +5,7 @@ machine:
     version: 7.1.3
   hosts:
     # This will be added to the `/etc/hosts` file
-    ixde.dev: 127.0.0.1
+    localhost: 127.0.0.1
 
 dependencies:
   cache_directories:
@@ -32,9 +32,11 @@ dependencies:
     - source /home/ubuntu/.bashrc
 
     # Each command is run in a separate shell, which means they do not share environments with preceding commands. @see https://circleci.com/docs/1.0/configuration/#phases
-    - cd ./web && drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='ubuntu' --account-pass='' --site-name=ixde.dev -y
+    - cd ./web && drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='ubuntu' --account-pass='NO' --site-name=ixde.dev -y
     - cd ./web && drush config-set system.performance css.preprocess 0 -y
     - cd ./web && drush config-set system.performance js.preprocess 0 -y
+    - rm /ubuntu/home/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
+    - cp ./circle.htaccess /ubuntu/home/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
 
 test:
   override:
