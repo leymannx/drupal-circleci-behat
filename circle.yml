@@ -27,7 +27,7 @@ dependencies:
 
 test:
   override:
-    - php ./bin/behat
+    - cd ./tests && behat
 
 # These commands are triggered only after a successful (green) build.
 deployment:
