@@ -27,3 +27,6 @@
 # Ignore deploy config and log
 /scripts/git-deploy/config.php
 /scripts/git-deploy/deploy.log
+
+# Ignore screenshots
+/tests/screenshots/*.html
