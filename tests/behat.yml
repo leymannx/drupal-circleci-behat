@@ -14,5 +14,4 @@ default:
       selenium2: ~
       browser_name: chrome
     Drupal\DrupalExtension:
-      drupal:
-        drupal_root: '../web'
+      blackbox: ~

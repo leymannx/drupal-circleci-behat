@@ -42,8 +42,8 @@ dependencies:
 
 test:
   pre:
-    - mkdir behat_screenshots
-    - chmod 777 behat_screenshots
+    - mkdir ../behat_screenshots
+    - chmod 777 ../behat_screenshots
     - export BEHAT_SCREENSHOTS="1"
   override:
     - cd ./tests && behat
