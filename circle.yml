@@ -49,8 +49,8 @@ test:
     - cd ./tests && behat
   post:
     # add a file so that the directory isn't empty (else copy will fail)
-    - touch behat_screenshots/keep
-    - cp behat_screenshots/* $CIRCLE_ARTIFACTS/
+    - touch ../behat_screenshots/keep
+    - cp ../behat_screenshots/* $CIRCLE_ARTIFACTS/
     - rm $CIRCLE_ARTIFACTS/keep
 
 # These commands are triggered only after a successful (green) build.

@@ -34,8 +34,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
       }
 
       $filename = microtime(true).'.png';
-      $path = $this->getContainer()
-          ->getParameter('kernel.root_dir').'/../behat_screenshots';
+      $path = '/home/ubuntu/behat_screenshots';
 
       if (!file_exists($path)) {
         mkdir($path);
