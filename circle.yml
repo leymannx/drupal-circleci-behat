@@ -36,7 +36,7 @@ dependencies:
     - sudo service apache2 restart
 
     - rm ./web/.htaccess
-    - sudo cp ./circle.htaccess $HOME/${CIRCLE_PROJECT_REPONAME}/web
+    - sudo cp ./circle.htaccess $HOME/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
 
 test:
   override:
