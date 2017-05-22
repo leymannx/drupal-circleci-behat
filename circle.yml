@@ -35,9 +35,6 @@ dependencies:
     # Restart the Apache server
     - sudo service apache2 restart
 
-    - rm ./web/.htaccess
-    - sudo cp ./circle.htaccess $HOME/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
-
 test:
   override:
     - cd ./tests && behat
