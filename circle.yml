@@ -25,6 +25,10 @@ dependencies:
     - cd ./web && drush config-set system.performance css.preprocess 0 -y
     - cd ./web && drush config-set system.performance js.preprocess 0 -y
 
+test:
+  override:
+    - php ./bin/behat
+
 # These commands are triggered only after a successful (green) build.
 deployment:
   dev:
