@@ -24,6 +24,7 @@ dependencies:
     - cd ./web && drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='ubuntu' --account-pass='' --site-name=ixde.dev -y
     - cd ./web && drush config-set system.performance css.preprocess 0 -y
     - cd ./web && drush config-set system.performance js.preprocess 0 -y
+    - sudo rm /etc/apache2/mods-enabled/php5.load
     # Copy Apache conf into `site-available`
     - sudo cp ./circle.conf /etc/apache2/sites-available
     # Use `a2ensite` to create a symlink for the config
