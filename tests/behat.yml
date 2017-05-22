@@ -13,3 +13,6 @@ default:
       base_url: http://ixde.dev/  # Replace with your site's URL
     Drupal\DrupalExtension:
       blackbox: ~
+      api_driver: 'drush'
+      drupal:
+        drupal_root: '../web'
