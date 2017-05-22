@@ -10,6 +10,6 @@ default:
   extensions:
     Behat\MinkExtension:
       goutte: ~
-      base_url: http://ixde.dev:8080/  # Replace with your site's URL
+      base_url: http://ixde.dev/  # Replace with your site's URL
     Drupal\DrupalExtension:
       blackbox: ~
