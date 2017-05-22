@@ -4,8 +4,8 @@ use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Behat\Hook\Scope\AfterStepScope;
 
 /**
  * Defines application features from the specific context.
@@ -25,37 +25,25 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   /**
    * @AfterStep
    */
-  public function printLastResponseOnError(AfterStepScope $event)
+  public function takeScreenShotAfterFailedStep(afterStepScope $scope)
   {
-    if (!$event->getTestResult()->isPassed()) {
-      $this->saveDebugScreenshot();
+    if (99 === $scope->getTestResult()->getResultCode()) {
+      $driver = $this->getSession()->getDriver();
+      if (!($driver instanceof Selenium2Driver)) {
+        return;
+      }
+
+      $filename = microtime(true).'.png';
+      $path = $this->getContainer()
+          ->getParameter('kernel.root_dir').'/../behat_screenshots';
+
+      if (!file_exists($path)) {
+        mkdir($path);
+      }
+
+      $this->saveScreenshot($filename, $path);
+      file_put_contents($path . $filename, $this->getSession()->getDriver()->getScreenshot());
     }
-  }
-
-  /**
-   * @Then /^save screenshot$/
-   */
-  public function saveDebugScreenshot()
-  {
-    $driver = $this->getSession()->getDriver();
-
-    if (!$driver instanceof Selenium2Driver) {
-      return;
-    }
-
-    if (!getenv('BEHAT_SCREENSHOTS')) {
-      return;
-    }
-
-    $filename = microtime(true).'.png';
-    $path = $this->getContainer()
-        ->getParameter('kernel.root_dir').'/../behat_screenshots';
-
-    if (!file_exists($path)) {
-      mkdir($path);
-    }
-
-    $this->saveScreenshot($filename, $path);
   }
 
 }
