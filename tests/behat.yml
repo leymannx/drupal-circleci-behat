@@ -9,10 +9,10 @@ default:
         - Drupal\DrupalExtension\Context\DrushContext
   extensions:
     Behat\MinkExtension:
+      base_url: http://ixde.dev:8080
       goutte: ~
-      base_url: http://ixde.dev/  # Replace with your site's URL
+      selenium2: ~
+      browser_name: chrome
     Drupal\DrupalExtension:
-      blackbox: ~
-      api_driver: 'drush'
       drupal:
         drupal_root: '../web'
