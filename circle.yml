@@ -35,8 +35,6 @@ dependencies:
     - cd ./web && drush si standard --db-url=mysql://ubuntu:@127.0.0.1/ix_de --account-name='ubuntu' --account-pass='NO' --site-name=ixde.dev -y
     - cd ./web && drush config-set system.performance css.preprocess 0 -y
     - cd ./web && drush config-set system.performance js.preprocess 0 -y
-    - rm /ubuntu/home/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
-    - cp ./circle.htaccess $HOME/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
 
 test:
   override:
