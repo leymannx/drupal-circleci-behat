@@ -28,6 +28,7 @@ dependencies:
 
     # Restart Apache to pickup new config
     - sudo rm /etc/apache2/mods-enabled/php5.load
+    - sudo a2ensite circle.conf
     - sudo a2enmod rewrite
     - sudo service apache2 restart
 
