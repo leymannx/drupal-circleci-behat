@@ -23,13 +23,8 @@ dependencies:
 
     - echo "memory_limit = 512M" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
 
-    # Copy Apache vhost config
-
-    - sudo cp ./circle.conf /etc/apache2/sites-available/000-default.conf
-
     # Restart Apache to pickup new config
     - sudo rm /etc/apache2/mods-enabled/php5.load
-#    - sudo a2ensite circle.conf
     - sudo a2enmod rewrite
     - sudo service apache2 restart
 
@@ -44,6 +39,7 @@ dependencies:
     - cd ./web && drush config-set system.performance css.preprocess 0 -y
     - cd ./web && drush config-set system.performance js.preprocess 0 -y
 
+    - cd /var/www && sudo rm -rf html && sudo ln -s /home/ubuntu/drupal-circleci-behat/web html
     - cp ./circle.htaccess $HOME/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
 
 test:
