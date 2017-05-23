@@ -24,13 +24,12 @@ dependencies:
     - echo "memory_limit = 512M" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
 
     # Copy Apache vhost config
-    - sudo rm /etc/apache2/sites-available/000-default.conf
-    - sudo cp ./circle.conf /etc/apache2/sites-available/000-default.conf
+    - sudo cp ./circle.conf /etc/apache2/sites-available
 
     # Restart Apache to pickup new config
     - sudo rm /etc/apache2/mods-enabled/php5.load
     - sudo a2enmod rewrite
-#    - sudo a2ensite circle.conf
+    - sudo a2ensite circle
     - sudo service apache2 restart
 
   post:
