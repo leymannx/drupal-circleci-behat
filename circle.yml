@@ -21,7 +21,7 @@ dependencies:
     # No password is required for the MySQL user `ubuntu`
     - mysql -u ubuntu -e "create database ix_de"
 
-    - echo "memory_limit = 512" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
+    - echo "memory_limit = 512M" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
 
     # Copy Apache vhost config
     - # sudo cp ./circle.conf /etc/apache2/sites-available
