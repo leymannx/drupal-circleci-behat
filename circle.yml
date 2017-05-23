@@ -1,11 +1,11 @@
 ## Customize the test machine
 machine:
+  timezone:
+      Europe/Berlin
+
   php:
     # Default: 5.6.17 @see https://circleci.com/docs/1.0/build-image-trusty/#php
     version: 7.1.3
-  hosts:
-    # This will be added to the `/etc/hosts` file
-    localhost: 127.0.0.1
 
 dependencies:
   cache_directories:
@@ -14,16 +14,20 @@ dependencies:
   pre:
     # Disable Xdebug @see https://circleci.com/docs/1.0/language-php/#xdebug
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+
+    # Behat and SilverStripe often require a reasonably large amount of memory, tune to your specific needs
+    - echo "memory_limit = 512M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+
     # No password is required for the MySQL user `ubuntu`
     - mysql -u ubuntu -e "create database ix_de"
 
-    - sudo a2enmod rewrite
-    - sudo rm /etc/apache2/mods-enabled/php5.load
-    # Copy Apache conf into `site-available`
+    # Copy Apache vhost config
     - sudo cp ./circle.conf /etc/apache2/sites-available
-    # Use `a2ensite` to create a symlink for the config
+
+    # Restart Apache to pickup new config
+    - sudo rm /etc/apache2/mods-enabled/php5.load
     - sudo a2ensite circle.conf
-    # Restart the Apache server
+    - sudo a2enmod rewrite
     - sudo service apache2 restart
 
   post:
