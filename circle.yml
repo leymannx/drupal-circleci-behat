@@ -8,7 +8,7 @@ machine:
     version: 7.1.3
 
   hosts:
-    ixde.dev 127.0.0.1
+    ixde.dev: 127.0.0.1
 
 dependencies:
   cache_directories:
