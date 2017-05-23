@@ -44,7 +44,6 @@ dependencies:
     - cd ./web && drush config-set system.performance js.preprocess 0 -y
 
     - cp ./circle.htaccess $HOME/${CIRCLE_PROJECT_REPONAME}/web/.htaccess
-    - cd /var/www && sudo rm -rf html && sudo ln -s /home/ubuntu/drupal-circleci-behat/web html
 
 test:
   override:
