@@ -16,7 +16,8 @@ dependencies:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
 
     # Behat and SilverStripe often require a reasonably large amount of memory, tune to your specific needs
-    - echo "memory_limit = 512M" > ~/.phpenv/versions/$(phpenv global)/etc/conf.d/memory.ini
+    - echo "sendmail_path=/bin/true" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "memory_limit=512M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
     # No password is required for the MySQL user `ubuntu`
     - mysql -u ubuntu -e "create database ix_de"
