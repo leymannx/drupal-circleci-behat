@@ -9,6 +9,7 @@ machine:
 
   hosts:
     ixde.dev: 127.0.0.1
+    localhost: 127.0.0.1
 
 dependencies:
   cache_directories:
