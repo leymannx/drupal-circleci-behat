@@ -20,10 +20,10 @@ dependencies:
     # Restart Apache to pickup new config
     - sudo cp ./circle.conf /etc/apache2/sites-available
     - sudo rm /etc/apache2/mods-enabled/php5.load
-    - sudo a2enmod rewrite
-    - sudo service apache2 restart
     - sudo a2ensite circle
     - sudo service apache2 reload
+    - sudo a2enmod rewrite
+    - sudo service apache2 restart
 
   post:
     # Make Composer executables available globally.
