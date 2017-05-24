@@ -2,8 +2,9 @@
 
 [![CircleCI](https://circleci.com/gh/leymannx/drupal-circleci-behat.svg?style=svg)](https://circleci.com/gh/leymannx/d8-multisite-behat-travis)
 
+Summary
 - Created a new D8 project from https://github.com/drupal-composer/drupal-project.
-- Created a new GitHub repo, connected it to Circle CI and added a `circle.yml`.
+- Created a new GitHub repo for it, connected it to Circle CI, committed everything and added a `circle.yml`.
 - Configured `circle.yml` to install Drupal, to run tests and to trigger `git pull` on remote server.
 
 ### Deployment
