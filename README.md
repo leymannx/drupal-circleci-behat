@@ -2,10 +2,15 @@
 
 [![CircleCI](https://circleci.com/gh/leymannx/drupal-circleci-behat.svg?style=svg)](https://circleci.com/gh/leymannx/d8-multisite-behat-travis)
 
-Summary
+## Summary
 - Created a new D8 project from https://github.com/drupal-composer/drupal-project.
-- Created a new GitHub repo for it, connected it to Circle CI, committed everything and added a `circle.yml`.
-- Configured `circle.yml` to to run tests against a one-time Drupal installation and to trigger `git pull` on remote server.
+- Created a new GitHub repo for it, connected it to Circle CI, committed everything and added a [`circle.yml`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/circle.yml).
+- Configured [`circle.yml`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/circle.yml) to to run tests against a one-time Drupal installation and to trigger `git pull` on remote server.
+
+## Config
+- [`circle.yml`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/circle.yml)
+- [`behat.yml`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/tests/behat.yml)
+- [`circle.conf`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/circle.conf)
 
 ### Deployment
 - Created a new user on the server, added him to `www-data` and let him clone the repo.
@@ -14,7 +19,7 @@ Summary
 - Note: Ensure having pulled the necessary scripts at least once on the server you'll run them from
 
 ### Subshell
-- In `circle.yml` each command is run in a separate shell, which means they do not share environments with preceding commands (each line you start from `~/project-name` no matter what you've done the line before).
+- In [`circle.yml`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/circle.yml) each command is run in a separate shell, which means they do not share environments with preceding commands (each line you start from `~/project-name` no matter what you've done the line before).
 - You'll run Circle CI's Ubuntu as user `ubuntu`.
 - Same user `ubuntu` for MySQL. No password.
 
