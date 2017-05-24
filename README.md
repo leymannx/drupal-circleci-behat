@@ -2,17 +2,20 @@
 
 [![CircleCI](https://circleci.com/gh/leymannx/drupal-circleci-behat.svg?style=svg)](https://circleci.com/gh/leymannx/d8-multisite-behat-travis)
 
-- First I created a new project from https://github.com/drupal-composer/drupal-project
-- Then connected to Circle CI and added a `circle.yml` to the root
-- It will install Drupal and run the tests
-- If everythings went well it will run a deploy script on the server
+- Created a new D8 project from https://github.com/drupal-composer/drupal-project.
+- Created a new GitHub repo, connected it to Circle CI and added a `circle.yml`.
+- Configured `circle.yml` to install Drupal, to run tests and to trigger `git pull` on remote server.
 
-Setting up the deployment wasn't that easy. In the end I created a new user on the server, added him to `www-data` and let him clone the repo. I created an SSH key pair, added the public key to his own `authorized_keys` file and the private key on Circle explicitly having a hostname set. In the end of `circle.yml` this user then `ssh` to the server and triggers the deploy script.
+### Deployment
+- Created a new user on the server, added him to `www-data` and let him clone the repo.
+- Created an SSH key pair, added the public key to his own `authorized_keys` file and the private key on Circle (hostname set).
+- In the end this user then `ssh` to the live/dev server and runs the deploy script.
 
-Next big step (for me) was to get `drush` running that then runs the Drupal installation. One of the most important things to remember were:
-- in `circle.yml` each command is run in a separate shell, which means they do not share environments with preceding commands, so `cd` into one directory perform this and that and on the next line then you'll again start from project root.
-- You'll run Circle CI's Ubuntu as user `ubuntu`. Same user `ubuntu` for MySQL. No password.
+### Subshell
+- In `circle.yml` each command is run in a separate shell, which means they do not share environments with preceding commands (each line you start from `~/project-name` no matter what you've done the line before).
+- You'll run Circle CI's Ubuntu as user `ubuntu`.
+- Same user `ubuntu` for MySQL. No password.
 
-Now Behat.
-
-- to be continued
+### Apache
+- Circle docs provide a [sample config for Apache](https://circleci.com/docs/1.0/language-php/#php-apache) which won't work.
+- You have to set some additional directives as done in my [`circle.conf`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/circle.conf).
