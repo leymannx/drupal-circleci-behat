@@ -5,7 +5,7 @@
 Summary
 - Created a new D8 project from https://github.com/drupal-composer/drupal-project.
 - Created a new GitHub repo for it, connected it to Circle CI, committed everything and added a `circle.yml`.
-- Configured `circle.yml` to install Drupal, to run tests and to trigger `git pull` on remote server.
+- Configured `circle.yml` to to run tests against a one-time Drupal installation and to trigger `git pull` on remote server.
 
 ### Deployment
 - Created a new user on the server, added him to `www-data` and let him clone the repo.
