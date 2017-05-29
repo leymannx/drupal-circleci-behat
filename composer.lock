@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c84bdbe0bb5d68dede84b92ba9e9a74f",
+    "content-hash": "373eeeb031456291dd373ce65af32c21",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1524,6 +1524,29 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "time": "2017-05-03T17:12:42+00:00"
+        },
+        {
+            "name": "drupal/drush-cmi-tools",
+            "version": "dev-8.x-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/previousnext/drush_cmi_tools.git",
+                "reference": "d1da0547a12bc1eb3356449c7abdf04a3bc36e99"
+            },
+            "type": "drupal-drush",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Export configuration to a directory and apply an ignore list.",
+            "homepage": "https://github.com/previousnext/drush_cmi_tools",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "issues": "https://github.com/previousnext/drush_cmi_tools/issues",
+                "source": "https://github.com/previousnext/drush_cmi_tools"
+            },
+            "time": "2017-05-13 07:07:04"
         },
         {
             "name": "drush/drush",
@@ -6470,7 +6493,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "drupal/drush-cmi-tools": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],

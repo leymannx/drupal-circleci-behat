@@ -13,6 +13,10 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "url": "https://github.com/previousnext/drush_cmi_tools.git",
+            "type": "git"
         }
     ],
     "require": {
@@ -21,6 +25,7 @@
         "drupal-composer/drupal-scaffold": "^2.2",
         "drupal/console": "~1.0",
         "drupal/core": "~8.0",
+        "drupal/drush-cmi-tools": "dev-8.x-1.x",
         "drush/drush": "~8.0",
         "webflo/drupal-finder": "^0.2.1",
         "webmozart/path-util": "^2.3"
