@@ -1,14 +1,12 @@
-# Drupal CirceCI Behat
-
-kick-start example
-
-[![CircleCI](https://circleci.com/gh/leymannx/drupal-circleci-behat/tree/develop.svg?style=svg)](https://circleci.com/gh/leymannx/drupal-circleci-behat/tree/develop)
-
-```
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
 version: 2
 jobs:
   build:
     docker:
+      # specify the version you desire here
       - image: circleci/php:7.1-apache-node-browsers
       - image: circleci/mariadb:latest
         environment:
@@ -25,10 +23,6 @@ jobs:
             sudo cp .circleci/drupal-circleci-behat.conf /etc/apache2/sites-available/drupal-circleci-behat.conf
             sudo a2ensite drupal-circleci-behat
             sudo service apache2 start
-            
-      - run:
-          name: Host
-          command: |
             echo 127.0.0.1 drupal-circleci-behat.localhost | sudo tee -a /etc/hosts
             cat /etc/hosts
             curl drupal-circleci-behat.localhost
@@ -41,9 +35,11 @@ jobs:
             sudo docker-php-ext-install gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
 
+      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.lock" }}
+          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run:
@@ -75,7 +71,16 @@ jobs:
     working_directory: ~/drupal-circleci-behat
     steps:
       - checkout
+#      - add_ssh_keys:  # add private key from CircleCI account based on fingerprint
+#          fingerprints:
+#            - "31:d7:67:f0:a5:b6:f8:4d:eb:ed:4b:28:64:d7:c1:6c"
       - run: echo "$CIRCLE_BRANCH"
+#      - run:
+#          name: Deploy master
+#          command: if [ $CIRCLE_BRANCH = 'master' ]; then ssh -p $LIVE_PORT $LIVE_USER@$LIVE_IP 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
+#      - run:
+#          name: Deploy develop
+#          command: if [ $CIRCLE_BRANCH = 'develop' ]; then ssh -p $DEV_PORT $DEV_USER@DEV_IP 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
 
 workflows:
   version: 2
@@ -85,4 +90,3 @@ workflows:
       - deploy:
           requires:
             - build
-```
