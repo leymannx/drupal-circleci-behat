@@ -32,7 +32,8 @@ jobs:
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
             sudo apt-get -yqq install libpng-dev mariadb-client nano
-            sudo docker-php-ext-install gd pdo_mysql
+            sudo docker-php-ext-install -j5 gd mbstring mysqli pdo pdo_mysql shmop
+            sudo docker-php-ext-enable -j5 gd mbstring mysqli pdo pdo_mysql shmop
 
       # Download and cache dependencies
       - restore_cache:
