@@ -35,8 +35,8 @@ jobs:
             sudo apt-get -yqq install libpng-dev mariadb-client nano
             sudo apt install -y sqlite3
             sudo docker-php-ext-install gd
-            echo $(HOSTNAME)
-            mysql -uroot -proot -e "show databases"
+            echo $HOSTNAME
+            mysql -h localhost -uroot -proot -e "show databases"
 
       # Download and cache dependencies
       - restore_cache:
