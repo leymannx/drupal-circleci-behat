@@ -29,7 +29,7 @@ jobs:
           name: Tools
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
-            sudo apt-get -yqq install libpng-dev nano
+            sudo apt-get -yqq install libmariadbclient-dev libpng-dev nano
             sudo apt install -y sqlite3
             sudo docker-php-ext-install gd
             mysql -h 127.0.0.1 -uroot -proot -e "show databases"
