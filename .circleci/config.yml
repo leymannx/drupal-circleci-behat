@@ -61,7 +61,7 @@ jobs:
           command: |
             cd web
             drush site:install --db-url=sqlite://sites/default/files/.circleci.sqlite --site-name='Drupal CircleCI Behat' -y
-            sudo chmod go+w ~/working/web/sites/default/files/.circleci.sqlite
+            sudo chmod go+w sites/default/files/.circleci.sqlite
 
       - run:
           name: Tests
