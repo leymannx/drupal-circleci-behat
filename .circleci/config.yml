@@ -60,7 +60,7 @@ jobs:
           name: Site Install
           command: |
             cd web
-            drush site:install --db-url=sqlite://sites/default/files/.circleci.sqlite --site-name='Drupal CircleCI Behat' -y
+            drush site:install --db-url=sqlite://sites/default/files/.circleci.sqlite --site-name='Hello World' -y
             sudo chmod go+w sites/default/files/.circleci.sqlite
 
       - run:
