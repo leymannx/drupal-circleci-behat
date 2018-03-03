@@ -8,11 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/php:7.1-apache-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mysql:9.4
+      - image: circleci/mysql:9.4
 
     working_directory: ~/drupal-circleci-behat
 
@@ -36,6 +32,7 @@ jobs:
             sudo apt-get -yqq install libpng-dev nano
             sudo apt install -y sqlite3
             sudo docker-php-ext-install gd
+            mysql -h 127.0.0.1 -uroot -proot -e "show databases"
 
       # Download and cache dependencies
       - restore_cache:
