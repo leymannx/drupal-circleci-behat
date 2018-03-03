@@ -33,7 +33,8 @@ jobs:
           name: Tools
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
-            sudo apt-get -yqq install nano sqlite3
+            sudo apt-get -yqq install libpng-dev nano
+            sudo apt install -y sqlite3
             sudo docker-php-ext-install gd
 
       # Download and cache dependencies
