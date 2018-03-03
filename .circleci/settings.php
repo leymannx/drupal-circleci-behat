@@ -295,7 +295,7 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+$settings['hash_salt'] = 'drupal-circleci-behat';
 
 /**
  * Deployment identifier.
@@ -783,3 +783,15 @@ $settings['entity_update_batch_size'] = 50;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+$config_directories['sync'] = '../config/sync';
+$databases['default']['default'] = array (
+  'database' => 'circle_test',
+  'username' => 'root',
+  'password' => '',
+  'prefix' => '',
+  'host' => '127.0.0.1',
+  'port' => '',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+$settings['install_profile'] = 'standard';

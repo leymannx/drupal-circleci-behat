@@ -9,9 +9,8 @@ default:
         - Drupal\DrupalExtension\Context\DrushContext
   extensions:
     Behat\MinkExtension:
-      base_url: http://ixde.dev
       goutte: ~
       selenium2: ~
-      browser_name: chrome
+      base_url: http://drupal-circleci-behat.localhost
     Drupal\DrupalExtension:
       blackbox: ~
