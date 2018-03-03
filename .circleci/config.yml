@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/php:7.1-apache-node-browsers
-      - image: circleci/mysql:9.4
+      - image: circleci/mariadb:latest
 
     working_directory: ~/drupal-circleci-behat
 
