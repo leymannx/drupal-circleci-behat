@@ -7,14 +7,14 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/php:7.1.5-browsers
+      - image: circleci/php:7.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mysql:9.4
 
-    working_directory: ~/repo
+    working_directory: ~/drupal-circleci-behat
 
     steps:
       - checkout
@@ -35,3 +35,23 @@ jobs:
 
       # run tests!
       - run: phpunit
+
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/drupal-circleci-behat
+    steps:
+      - checkout
+#      - add_ssh_keys:  # add key from CircleCI account based on fingerprint
+#          fingerprints:
+#            - "31:d7:67:f0:a5:b6:f8:4d:eb:ed:4b:28:64:d7:c1:6c"
+      - run: echo "$CIRCLE_BRANCH"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
