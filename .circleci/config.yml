@@ -9,6 +9,8 @@ jobs:
       # specify the version you desire here
       - image: circleci/php:7.1-apache-node-browsers
       - image: circleci/mariadb:latest
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_ROOT_HOST=%
 
     working_directory: ~/drupal-circleci-behat
 
