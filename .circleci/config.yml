@@ -34,6 +34,7 @@ jobs:
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
             sudo apt-get -yqq install nano sqlite3
+            sudo docker-php-ext-install gd
 
       # Download and cache dependencies
       - restore_cache:
@@ -58,16 +59,13 @@ jobs:
           name: Site Install
           command: |
             cd web
-            drush -l j1 site:install --db-url=sqlite://sites/default/files/.circleci.sqlite --site-name='Drupal CircleCI Behat' -y
+            drush site:install --db-url=sqlite://sites/default/files/.circleci.sqlite --site-name='Drupal CircleCI Behat' -y
             sudo chmod go+w ~/working/web/sites/default/files/.circleci.sqlite
 
       - run:
           name: Tests
           command: |
             behat --no-snippets -f pretty -o std
-
-      # run tests!
-      - run: phpunit
 
   deploy:
     machine:
