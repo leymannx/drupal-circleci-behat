@@ -71,16 +71,24 @@ jobs:
     working_directory: ~/drupal-circleci-behat
     steps:
       - checkout
-#      - add_ssh_keys:  # add private key from CircleCI account based on fingerprint
+#      - run:
+#          name: Fix ssh Could not resolve hostname
+#          command: |
+#            ssh-keyscan "${LIVE_IP}" >> ~/.ssh/known_hosts
+#            ssh-keyscan "${DEV_IP}" >> ~/.ssh/known_hosts
+
+#      - add_ssh_keys: # add private SSH key from CircleCI account based on fingerprint
 #          fingerprints:
-#            - "31:d7:67:f0:a5:b6:f8:4d:eb:ed:4b:28:64:d7:c1:6c"
-      - run: echo "$CIRCLE_BRANCH"
+#            - "14:09:a1:b2:b3:c4:d5:e6:f7:g8:h9:81:"
+
+      - run: echo "${CIRCLE_BRANCH}"
+#      - run: echo "${DEV_USER}"; echo "${DEV_IP}"; echo "${LIVE_USER}"; echo "${LIVE_IP}";
 #      - run:
 #          name: Deploy master
-#          command: if [ $CIRCLE_BRANCH = 'master' ]; then ssh -p $LIVE_PORT $LIVE_USER@$LIVE_IP 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
+#          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then ssh -p "${LIVE_PORT}" "${LIVE_USER}"@"${LIVE_IP}" 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
 #      - run:
-#          name: Deploy develop
-#          command: if [ $CIRCLE_BRANCH = 'develop' ]; then ssh -p $DEV_PORT $DEV_USER@DEV_IP 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
+#          name: Deploy dev
+#          command: if [ "${CIRCLE_BRANCH}" == "develop" ]; then ssh -p "${DEV_PORT}" "${DEV_USER}"@"${DEV_IP}" 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
 
 workflows:
   version: 2
