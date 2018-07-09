@@ -2,7 +2,7 @@
 
 kick-start example
 
-[![CircleCI](https://img.shields.io/circleci/project/github/leymannx/drupal-circleci-behat/develop.svg)](https://circleci.com/gh/leymannx/drupal-circleci-behat/tree/develop)
+[![CircleCI](https://circleci.com/gh/leymannx/drupal-circleci-behat.svg?style=svg)](https://circleci.com/gh/leymannx/drupal-circleci-behat)
 
 Based on https://github.com/drupal-composer/drupal-project
 
