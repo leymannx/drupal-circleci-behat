@@ -6,7 +6,8 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
+      # You can easily switch containers and versions here.
+      # @see https://circleci.com/docs/2.0/circleci-images/#php
       - image: circleci/php:7.1-apache-node-browsers
       - image: circleci/mariadb:latest
         environment:
@@ -17,31 +18,39 @@ jobs:
     steps:
       - checkout
 
+      # Setup Apache.
+      # For convenience the site will be accessible internally under a
+      # *.localhost TLD. Which also is used in the behat.yml.
       - run:
-          name: Apache
+          name: Setup Apache
           command: |
             sudo cp .circleci/drupal-circleci-behat.conf /etc/apache2/sites-available/drupal-circleci-behat.conf
             sudo a2ensite drupal-circleci-behat
             sudo service apache2 start
             echo 127.0.0.1 drupal-circleci-behat.localhost | sudo tee -a /etc/hosts
-            cat /etc/hosts
-            curl drupal-circleci-behat.localhost
 
       - run:
-          name: Tools
+          name: Setup tools
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
             sudo apt-get -yqq install libpng-dev mariadb-client nano
             sudo docker-php-ext-install gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
 
-      # Download and cache dependencies
+      # Restore cache.
+      # Cache gets invalidated automatically as soon as the composer.lock has
+      # changed between two builds.
+      # You can easily invalidate the cache manually by incrementing its key:
+      # v2-..., v3-... and so on.
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.lock" }}
-          # fallback to using the latest cache if no exact match is found
+          # Fallback to use the latest cache if no exact match is found.
           - v1-dependencies-
 
+      # Install dependencies and add the bin dir to the global $PATH to use its
+      # commands without needing to reference their location:
+      # Now you can use `drush` instead of `cd web && ../bin/drush` for example.
       - run:
           name: Composer Install
           command: |
@@ -49,24 +58,58 @@ jobs:
             echo 'export PATH=$HOME/drupal-circleci-behat/bin:$PATH' >> $BASH_ENV
             source /home/circleci/.bashrc
 
+      # Save the dependencies.
+      # This step as all other steps can also get implemented multiple times.
+      # Imagine what else you can cache then:
+      # - theme dependencies
+      # - database dumps (importing an existing database before `drush cim`
+      #   will dramatically improve build time when the project gets larger)
+      # - ...
       - save_cache:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.lock" }}
 
+      # A vanilla Drupal.
+      # As soon as your project starts you will need to extend this step:
+      # - drush updb
+      # - drush cim
+      # - ...
       - run:
-          name: Site Install
+          name: Setup Drupal
           command: |
             cd web
             drush site:install --db-url=mysql://root@127.0.0.1/circle_test --site-name='Hello World' -y
 
+      # Run tests and store the results to get a nice looking test summary.
+      # @see https://circleci.com/docs/2.0/configuration-reference/#store_test_results
       - run:
           name: Tests
           command: |
-            behat --no-snippets -f pretty -o std
+            mkdir -p test-results/junit
+            behat --no-snippets -f pretty -o std -f junit -o test-results/junit/junit.xml
+      - store_test_results:
+          path: test-results
 
+  # Above commands all belong to the build step. Now comes the deploy step.
+  # Which only gets reached when all tests passed.
+  #
+  # This step absolutely depends on your deployment tactic:
+  # - maybe you will SSH upload the build to your servers
+  # - maybe you will SSH trigger some deploy script to do the work
+  # - ...
+  #
+  # In this example CircleCI branch-wise SSH into the dev or live server and
+  # calls a Bash script which then may run:
+  # - bin/drush state:set system.maintenance_mode 1 -y
+  # - git pull
+  # - composer install
+  # - bin/drush updb -y
+  # - bin/drush cim -y
+  # - ...
   deploy:
     machine:
+
       enabled: true
     working_directory: ~/drupal-circleci-behat
     steps:
@@ -90,11 +133,27 @@ jobs:
 #          name: Deploy dev
 #          command: if [ "${CIRCLE_BRANCH}" == "develop" ]; then ssh -p "${DEV_PORT}" "${DEV_USER}"@"${DEV_IP}" 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
 
+# In this example the whole workflow which consists of a build step and a
+# deploy step only gets triggered on pushes to the develop branch and the
+# master branch.
+# Simply remove the filters to have it triggered in every branch (which raises
+# the risk that you hit the maximum 1.500 build minutes/month when you only have
+# a free plan).
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+                - master
       - deploy:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - develop
+                - master
