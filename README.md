@@ -6,7 +6,7 @@ kick-start example
 
 Based on https://github.com/drupal-composer/drupal-project
 
-```
+```yaml
 version: 2
 jobs:
   # THE BUILD STEP
