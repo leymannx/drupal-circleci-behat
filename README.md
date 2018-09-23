@@ -79,10 +79,10 @@ jobs:
             - "14:09:a1:b2:b3:c4:d5:e6:f7:g8:19:81:"
       - run:
           name: Deploy master
-          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then ssh -p "${LIVE_PORT}" "${LIVE_USER}"@"${LIVE_IP}" 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
+          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then ssh -p "${LIVE_PORT}" "${LIVE_USER}"@"${LIVE_IP}" "cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh ${CIRCLE_SHA1}"; else echo "Skipped"; fi
       - run:
           name: Deploy dev
-          command: if [ "${CIRCLE_BRANCH}" == "develop" ]; then ssh -p "${DEV_PORT}" "${DEV_USER}"@"${DEV_IP}" 'cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh'; else echo "Skipped"; fi
+          command: if [ "${CIRCLE_BRANCH}" == "develop" ]; then ssh -p "${DEV_PORT}" "${DEV_USER}"@"${DEV_IP}" "cd /var/www/drupal-circleci-behat/scripts/deployment && . deploy.sh ${CIRCLE_SHA1}"; else echo "Skipped"; fi
 
 # ONLY ON DEVELOP AND ON MASTER BRANCHES
 workflows:

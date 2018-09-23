@@ -11,7 +11,14 @@ cd ${DIR};
 cd ../..
 
 # Git pull, composer install.
-git pull
+git fetch --prune
+git branch -a
+git status
+if [ -n "$1" ]; then
+  git reset --hard "$1"
+else
+  git pull
+fi
 composer install --no-interaction --no-dev --prefer-dist
 
 # Drupal routine.
