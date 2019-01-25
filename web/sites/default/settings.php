@@ -1,5 +1,7 @@
 <?php
 
+// @codingStandardsIgnoreFile
+
 /**
  * @file
  * Drupal site-specific configuration file.
@@ -86,7 +88,7 @@
  * );
  * @endcode
  */
-$databases = array();
+$databases = [];
 
 /**
  * Customizing database settings.
@@ -249,7 +251,7 @@ $databases = array();
  *   );
  * @endcode
  */
-$config_directories = array();
+$config_directories = [];
 
 /**
  * Settings:
@@ -260,23 +262,6 @@ $config_directories = array();
  *
  * @see \Drupal\Core\Site\Settings::get()
  */
-
-/**
- * The active installation profile.
- *
- * Changing this after installation is not recommended as it changes which
- * directories are scanned during extension discovery. If this is set prior to
- * installation this value will be rewritten according to the profile selected
- * by the user.
- *
- * @see install_select_profile()
- *
- * @deprecated in Drupal 8.3.0 and will be removed before Drupal 9.0.0. The
- *   install profile is written to the core.extension configuration. If a
- *   service requires the install profile use the 'install_profile' container
- *   parameter. Functional code can use \Drupal::installProfile().
- */
-# $settings['install_profile'] = '';
 
 /**
  * Salt for one-time login links, cancel links, form tokens, etc.
@@ -295,7 +280,7 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'drupal-circleci-behat';
+$settings['hash_salt'] = '';
 
 /**
  * Deployment identifier.
@@ -377,7 +362,7 @@ $settings['update_free_access'] = FALSE;
  * Specify every reverse proxy IP address in your environment.
  * This setting is required if $settings['reverse_proxy'] is TRUE.
  */
-# $settings['reverse_proxy_addresses'] = array('a.b.c.d', ...);
+# $settings['reverse_proxy_addresses'] = ['a.b.c.d', ...];
 
 /**
  * Set this value if your proxy server sends the client IP in a header
@@ -571,10 +556,10 @@ if ($settings['hash_salt']) {
  * The "en" part of the variable name, is dynamic and can be any langcode of
  * any added language. (eg locale_custom_strings_de for german).
  */
-# $settings['locale_custom_strings_en'][''] = array(
+# $settings['locale_custom_strings_en'][''] = [
 #   'forum'      => 'Discussion board',
 #   '@count min' => '@count minutes',
-# );
+# ];
 
 /**
  * A custom theme for the offline page:
@@ -628,7 +613,7 @@ if ($settings['hash_salt']) {
  *   override in a services.yml file in the same directory as settings.php
  *   (definitions in this file will override service definition defaults).
  */
-# $settings['bootstrap_config_storage'] = array('Drupal\Core\Config\BootstrapConfigStorageFactory', 'getFileStorage');
+# $settings['bootstrap_config_storage'] = ['Drupal\Core\Config\BootstrapConfigStorageFactory', 'getFileStorage'];
 
 /**
  * Configuration overrides.
@@ -779,19 +764,9 @@ $settings['entity_update_batch_size'] = 50;
  *
  * Keep this code block at the end of this file to take full effect.
  */
-#
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
-$config_directories['sync'] = '../config/sync';
-$databases['default']['default'] = array (
-  'database' => 'circle_test',
-  'username' => 'root',
-  'password' => '',
-  'prefix' => '',
-  'host' => '127.0.0.1',
-  'port' => '',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
-$settings['install_profile'] = 'standard';
+
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}
+
+$config_directories['sync'] = '../config/sync/default';
