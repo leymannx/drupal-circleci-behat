@@ -88,10 +88,11 @@ jobs:
       - run:
           name: Tests
           command: |
-            mkdir -p test-results/junit
-            behat --no-snippets -f pretty -o std -f junit -o test-results/junit/junit.xml
+            mkdir -p tests/test-results/junit
+            cd tests/behat
+            behat --no-snippets -f pretty -o std -f junit -o ../../test-results/junit/junit.xml
       - store_test_results:
-          path: test-results
+          path: tests/test-results
 
   # Above commands all belong to the build step. Now comes the deploy step.
   # Which only gets reached when all tests passed.
