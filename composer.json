@@ -28,6 +28,7 @@
     },
     "require-dev": {
         "behat/behat": "^3.5",
+        "behat/mink-extension": "^2.3",
         "webflo/drupal-core-require-dev": "^8.6.0"
     },
     "conflict": {
