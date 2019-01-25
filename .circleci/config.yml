@@ -8,7 +8,7 @@ jobs:
     docker:
       # You can easily switch containers and versions here.
       # @see https://circleci.com/docs/2.0/circleci-images/#php
-      - image: circleci/php:7.1-apache-node-browsers
+      - image: circleci/php:7.2-apache-node-browsers
       - image: circleci/mariadb:latest
         environment:
           - MYSQL_ROOT_HOST=%

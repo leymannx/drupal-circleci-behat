@@ -36,7 +36,9 @@
     "prefer-stable": true,
     "config": {
         "sort-packages": true,
-        "bin-dir": "bin/"
+        "platform": {
+            "php": "7.2"
+        }
     },
     "autoload": {
         "classmap": [
