@@ -154,8 +154,9 @@ workflows:
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - develop
-                - master
+# You could limit the CI to only be triggered for develop and master branches.
+#          filters:
+#            branches:
+#              only:
+#                - develop
+#                - master
