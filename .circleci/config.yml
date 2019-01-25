@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Setup Apache
           command: |
-            sudo cp .circleci/drupal-circleci-behat.conf /etc/apache2/sites-available/drupal-circleci-behat.conf
+            sudo cp .circleci/env/drupal-circleci-behat.conf /etc/apache2/sites-available/drupal-circleci-behat.conf
             sudo a2ensite drupal-circleci-behat
             sudo service apache2 start
             echo 127.0.0.1 drupal-circleci-behat.localhost | sudo tee -a /etc/hosts
