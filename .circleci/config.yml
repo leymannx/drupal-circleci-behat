@@ -81,7 +81,7 @@ jobs:
             cp .circleci/env/.htaccess web/.htaccess
             cp .circleci/env/settings.local.php web/sites/default/settings.local.php
             cd web
-            drush site:install --db-url=mysql://root@127.0.0.1/circle_test --site-name='Hello World' -y
+            drush site:install --site-name='Hello World' -y
 
       # Run tests and store the results to get a nice looking test summary.
       # @see https://circleci.com/docs/2.0/configuration-reference/#store_test_results
