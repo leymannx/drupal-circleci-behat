@@ -35,10 +35,19 @@ jobs:
           name: Setup tools
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
-            sudo apt-get -yqq install libpng-dev mariadb-client nano
+            sudo apt-get -yqq install libpng-dev mariadb-client nano xvfb
             sudo docker-php-ext-install gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
 
+      # Xvfb enables you to run graphical applications for browser tests
+      # headlessly (on a CI server without a display) while also having the
+      # ability to take screenshots.
+      - run:
+          name: Start Xvfb
+          command: |
+            sudo Xvfb :7055
+            export DISPLAY=:7055
+          background: true
       # Restore cache.
       # Cache gets invalidated automatically as soon as the composer.lock has
       # changed between two builds.
