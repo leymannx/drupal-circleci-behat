@@ -35,9 +35,29 @@ jobs:
           name: Setup tools
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
-            sudo apt-get -yqq install libpng-dev mariadb-client nano
+            sudo apt-get -yqq install libpng-dev mariadb-client nano xvfb
             sudo docker-php-ext-install gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
+
+      # Xvfb enables you to run graphical applications for browser tests
+      # headlessly (on a CI server without a display) while also having the
+      # ability to take screenshots.
+      - run:
+          name: Start Xvfb
+          command: |
+            sudo Xvfb :7055
+            export DISPLAY=:7055
+          background: true
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.5.jar
+      - run:
+          name: Start Selenium
+          command: |
+            mkdir -p /tmp/selenium
+            java -jar selenium-server-standalone-3.141.5.jar -log /tmp/selenium/selenium.log
+          background: true
 
       # Restore cache.
       # Cache gets invalidated automatically as soon as the composer.lock has
@@ -83,7 +103,10 @@ jobs:
             cp .circleci/env/.htaccess web/.htaccess
             cp .circleci/env/settings.local.php web/sites/default/settings.local.php
             cd web
-            drush site:install --site-name='Hello World' -y
+            drush -y site:install --site-name='Hello World'
+            drush -y ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
+            drush -y config-set "system.site" uuid "c6e1475a-d30b-4dac-9cba-7dc12de37090"
+            drush -y cim
 
       # Run tests and store the results to get a nice looking test summary.
       # @see https://circleci.com/docs/2.0/configuration-reference/#store_test_results
@@ -95,6 +118,12 @@ jobs:
             behat --no-snippets -f pretty -o std -f junit -o test-results/junit/junit.xml
       - store_test_results:
           path: tests/behat/test-results
+
+      # When we started Selenium we told it to log into that directory. Let's
+      # store the logs for better debuggability, to maybe have a look at them
+      # later from the CircleCI UI.
+      - store_artifacts:
+          path: /tmp/selenium
 
   # Above commands all belong to the build step. Now comes the deploy step.
   # Which only gets reached when all tests passed.
@@ -148,12 +177,13 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - develop
-                - master
+      - build
+#      - build:
+#          filters:
+#            branches:
+#              only:
+#                - develop
+#                - master
       - deploy:
           requires:
             - build
