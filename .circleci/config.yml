@@ -148,12 +148,13 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - develop
-                - master
+      - build
+#      - build:
+#          filters:
+#            branches:
+#              only:
+#                - develop
+#                - master
       - deploy:
           requires:
             - build
