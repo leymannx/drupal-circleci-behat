@@ -119,6 +119,12 @@ jobs:
       - store_test_results:
           path: tests/behat/test-results
 
+      # When we started Selenium we told it to log into that directory. Let's
+      # store the logs for better debuggability, to maybe have a look at them
+      # later from the CircleCI UI.
+      - store_artifacts:
+          path: /tmp/selenium
+
   # Above commands all belong to the build step. Now comes the deploy step.
   # Which only gets reached when all tests passed.
   #
