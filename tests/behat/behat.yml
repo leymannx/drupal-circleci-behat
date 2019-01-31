@@ -9,8 +9,16 @@ default:
         - Drupal\DrupalExtension\Context\DrushContext
   extensions:
     Behat\MinkExtension:
-      goutte: ~
-      selenium2: ~
       base_url: http://drupal-circleci-behat.localhost
+      goutte: ~
+      selenium2:
+        wd_host: http://drupal-circleci-behat.localhost:4444/wd/hub
+        capabilities:
+          marionette: true
+          browser: chrome
+      browser_name: chrome
     Drupal\DrupalExtension:
       blackbox: ~
+      api_driver: drupal
+      drupal:
+        drupal_root: %paths.base%/../../web

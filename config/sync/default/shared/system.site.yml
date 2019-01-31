@@ -1,0 +1,14 @@
+uuid: c6e1475a-d30b-4dac-9cba-7dc12de37090
+name: 'Hello World'
+mail: info@drupal-circleci-behat.localhost
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
