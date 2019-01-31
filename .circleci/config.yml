@@ -48,6 +48,17 @@ jobs:
             sudo Xvfb :7055
             export DISPLAY=:7055
           background: true
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.5.jar
+      - run:
+          name: Start Selenium
+          command: |
+            mkdir -p /tmp/selenium
+            java -jar selenium-server-standalone-3.141.5.jar -log /tmp/selenium/selenium.log
+          background: true
+
       # Restore cache.
       # Cache gets invalidated automatically as soon as the composer.lock has
       # changed between two builds.
