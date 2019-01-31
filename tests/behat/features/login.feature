@@ -7,3 +7,7 @@ Feature: Login testing.
     When I press "op"
     Then I should see an ".error" element
 
+  @api @javascript
+  Scenario: Login in as authenticated user
+    Given I am logged in as a user with the "Authenticated user" role
+    Then I should see an "#toolbar-administration" element
