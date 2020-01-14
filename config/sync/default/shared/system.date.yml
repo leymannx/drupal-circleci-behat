@@ -1,8 +1,8 @@
 country:
-  default: DE
+  default: ''
 first_day: 0
 timezone:
-  default: Europe/Berlin
+  default: UTC
   user:
     configurable: true
     warn: false

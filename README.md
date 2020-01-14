@@ -40,7 +40,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.2-apache-node-browsers
+      - image: circleci/php:7.3-apache-node-browsers
       - image: circleci/mariadb:latest
         environment:
           - MYSQL_ROOT_HOST=%

@@ -10,7 +10,7 @@ jobs:
       # @see https://circleci.com/docs/2.0/circleci-images/#php
       # The following container already comes with Apache, Node.js and
       # chromedriver and geckodriver preinstalled.
-      - image: circleci/php:7.2-apache-node-browsers
+      - image: circleci/php:7.3-apache-node-browsers
       - image: circleci/mariadb:latest
         environment:
           - MYSQL_ROOT_HOST=%
@@ -92,8 +92,16 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.lock" }}
 
-      # A vanilla Drupal.
-      # As soon as your project starts you will need to extend this step:
+      # A minimal profile Drupal created locally using the following command:
+      # - drush -y site:install minimal --site-name='Hello World' --site-mail=info@drupal-circleci-behat.localhost --account-name=admin --account-pass=admin
+      # - drush -y cex
+      # But you could also simply create a standard profile Drupal, set UUID to be the same as in system.site.yml and then import existing config:
+      # - drush -y site:install
+      # - drush -y ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
+      # - drush -y config-set "system.site" uuid "c6e1475a-d30b-4dac-9cba-7dc12de37090"
+      # - drush -y cim
+      # As soon as your project grows you may want to rewrite this step:
+      # - drush sqlc < circleci-cached-database-dump.sql
       # - drush updb
       # - drush cim
       # - ...
@@ -103,10 +111,7 @@ jobs:
             cp .circleci/env/.htaccess web/.htaccess
             cp .circleci/env/settings.local.php web/sites/default/settings.local.php
             cd web
-            drush -y site:install --site-name='Hello World'
-            drush -y ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
-            drush -y config-set "system.site" uuid "c6e1475a-d30b-4dac-9cba-7dc12de37090"
-            drush -y cim
+            drush -y site:install --existing-config
 
       # Run tests and store the results to get a nice looking test summary.
       # @see https://circleci.com/docs/2.0/configuration-reference/#store_test_results

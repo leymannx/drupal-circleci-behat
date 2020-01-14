@@ -14,8 +14,10 @@ default:
       selenium2:
         wd_host: http://drupal-circleci-behat.localhost:4444/wd/hub
         capabilities:
-          marionette: true
           browser: chrome
+          extra_capabilities:
+            chromeOptions:
+              w3c: false
       browser_name: chrome
     Drupal\DrupalExtension:
       blackbox: ~
