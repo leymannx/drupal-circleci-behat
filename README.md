@@ -96,10 +96,7 @@ jobs:
             cp .circleci/env/.htaccess web/.htaccess
             cp .circleci/env/settings.local.php web/sites/default/settings.local.php
             cd web
-            drush -y site:install --site-name='Hello World'
-            drush -y ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
-            drush -y config-set "system.site" uuid "c6e1475a-d30b-4dac-9cba-7dc12de37090"
-            drush -y cim
+            drush -y site:install --existing-config
       - run:
           name: Tests
           command: |
