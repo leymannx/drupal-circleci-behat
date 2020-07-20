@@ -165,8 +165,8 @@ jobs:
 #            - "14:09:a1:b2:b3:c4:d5:e6:f7:g8:h9:81:"
 #
 #      - run:
-#          name: Deploy master
-#          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then ssh -p "${LIVE_PORT}" "${LIVE_USER}"@"${LIVE_IP}" "cd /var/www/wordpress-circleci-behat/scripts/deployment && . deploy.sh ${CIRCLE_SHA1}"; else echo "Skipped"; fi
+#          name: Deploy main
+#          command: if [ "${CIRCLE_BRANCH}" == "main" ]; then ssh -p "${LIVE_PORT}" "${LIVE_USER}"@"${LIVE_IP}" "cd /var/www/wordpress-circleci-behat/scripts/deployment && . deploy.sh ${CIRCLE_SHA1}"; else echo "Skipped"; fi
 #      - run:
 #          name: Deploy dev
 #          command: if [ "${CIRCLE_BRANCH}" == "develop" ]; then ssh -p "${DEV_PORT}" "${DEV_USER}"@"${DEV_IP}" "cd /var/www/wordpress-circleci-behat/scripts/deployment && . deploy.sh ${CIRCLE_SHA1}"; else echo "Skipped"; fi
@@ -174,7 +174,7 @@ jobs:
 
 # In this example the whole workflow which consists of a build step and a
 # deploy step only gets triggered on pushes to the develop branch and the
-# master branch.
+# main branch.
 # Simply remove the filters to have it triggered in every branch (which raises
 # the risk that you hit the maximum 1.500 build minutes/month when you only have
 # a free plan).
@@ -188,13 +188,13 @@ workflows:
 #            branches:
 #              only:
 #                - develop
-#                - master
+#                - main
       - deploy:
           requires:
             - build
-# You could limit the CI to only be triggered for develop and master branches.
+# You could limit the CI to only be triggered for develop and main branches.
 #          filters:
 #            branches:
 #              only:
 #                - develop
-#                - master
+#                - main
