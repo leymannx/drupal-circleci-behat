@@ -768,3 +768,9 @@ $settings['entity_update_batch_size'] = 50;
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
+
+// Automatically generated include for settings managed by ddev.
+$ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
+if (is_readable($ddev_settings) && getenv('IS_DDEV_PROJECT') == 'true') {
+  require $ddev_settings;
+}
