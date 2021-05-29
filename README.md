@@ -30,7 +30,7 @@ default:
       blackbox: ~
       api_driver: drupal
       drupal:
-        drupal_root: %paths.base%/../../web
+        drupal_root: '%paths.base%/../../web'
 ```
 
 ## [`.circleci/config.yml`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/.circleci/config.yml):
