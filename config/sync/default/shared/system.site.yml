@@ -1,5 +1,5 @@
-uuid: 8c11fe4a-b231-4fd1-9a77-9aae6a5aa3d0
-name: 'Hello World'
+uuid: 3965c918-83e3-45b0-b105-d2b789d206ed
+name: Hello
 mail: info@drupal-circleci-behat.localhost
 slogan: ''
 page:

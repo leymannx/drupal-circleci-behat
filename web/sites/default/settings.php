@@ -251,7 +251,7 @@ $databases = [];
  *   );
  * @endcode
  */
-$config_directories['sync'] = '../config/sync/default/shared';
+$settings['config_sync_directory'] = '../config/sync/default/shared';
 
 /**
  * Settings:

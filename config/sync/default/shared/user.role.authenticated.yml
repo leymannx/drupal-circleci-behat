@@ -1,4 +1,4 @@
-uuid: 66c70aa2-8f6f-4e74-b803-b80054e18c75
+uuid: 943d749c-610e-42c5-b250-86f17f35fce3
 langcode: en
 status: true
 dependencies: {  }
@@ -10,4 +10,3 @@ weight: 1
 is_admin: false
 permissions:
   - 'access content'
-  - 'access toolbar'
