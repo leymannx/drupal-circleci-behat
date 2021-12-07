@@ -30,7 +30,7 @@ default:
       blackbox: ~
       api_driver: drupal
       drupal:
-        drupal_root: %paths.base%/../../web
+        drupal_root: '%paths.base%/../../web'
 ```
 
 ## [`.circleci/config.yml`](https://github.com/leymannx/drupal-circleci-behat/blob/develop/.circleci/config.yml):
@@ -40,7 +40,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-apache-node-browsers
+      - image: circleci/php:7.4-apache-node-browsers
       - image: circleci/mariadb:latest
         environment:
           - MYSQL_ROOT_HOST=%
@@ -58,7 +58,7 @@ jobs:
           name: Setup tools
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
-            sudo apt-get -yqq install libpng-dev mariadb-client nano xvfb
+            sudo apt-get -yqq install libpng-dev libonig-dev mariadb-client nano xvfb
             sudo docker-php-ext-install gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
       - run:
