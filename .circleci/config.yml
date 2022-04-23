@@ -32,6 +32,7 @@ jobs:
       - run:
           name: Setup Apache
           command: |
+            sudo apt-get update && sudo apt-get install -y apache2
             sudo cp .circleci/env/drupal-circleci-behat.conf /etc/apache2/sites-available/drupal-circleci-behat.conf
             sudo a2ensite drupal-circleci-behat
             sudo service apache2 start
