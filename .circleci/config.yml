@@ -32,18 +32,18 @@ jobs:
       - run:
           name: Setup Apache
           command: |
-            sudo apt-get update && sudo apt-get install -y apache2
+            sudo apt-get -qq update && sudo apt-get -qqy upgrade
+            sudo apt-get  -yqq install apache2
             sudo cp .circleci/env/drupal-circleci-behat.conf /etc/apache2/sites-available/drupal-circleci-behat.conf
             sudo a2ensite drupal-circleci-behat
-            sudo service apache2 start
             echo 127.0.0.1 drupal-circleci-behat.localhost | sudo tee -a /etc/hosts
+            sudo service apache2 start
 
       - run:
           name: Setup tools
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
-            sudo apt-get -yqq install libpng-dev libonig-dev mariadb-client nano xvfb
-            sudo docker-php-ext-install gd mbstring mysqli pdo pdo_mysql
+            sudo apt-get -yqq install libpng-dev libonig-dev mariadb-client nano xvfb gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
 
       # Xvfb enables you to run graphical applications for browser tests
