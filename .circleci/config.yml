@@ -3,6 +3,8 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.2.5
 jobs:
   build:
     docker:
@@ -25,6 +27,8 @@ jobs:
 
     steps:
       - checkout
+
+      - browser-tools/install-browser-tools
 
       # Setup Apache.
       # For convenience the site will be accessible internally under a
