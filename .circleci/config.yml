@@ -11,7 +11,13 @@ jobs:
       # The following container already comes with Apache, Node.js and
       # chromedriver and geckodriver preinstalled.
       - image: cimg/php:7.4-apache-node-browsers
+        auth:
+          username: leymannx
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var
       - image: cimg/mariadb:latest
+        auth:
+          username: leymannx
+          password: $DOCKERHUB_PASSWORD
         environment:
           - MYSQL_ROOT_HOST=%
 
