@@ -10,7 +10,7 @@ jobs:
       # @see https://circleci.com/docs/2.0/circleci-images/#php
       # The following container already comes with Apache, Node.js and
       # chromedriver and geckodriver preinstalled.
-      - image: cimg/php:7.4-apache-node-browsers
+      - image: cimg/php:7.4-node-browsers
         auth:
           username: leymannx
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var
