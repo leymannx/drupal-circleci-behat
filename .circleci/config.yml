@@ -44,7 +44,6 @@ jobs:
           command: |
             sudo apt-get -qq update && sudo apt-get -qqy upgrade
             sudo apt-get -yqq install libpng-dev libonig-dev mariadb-client nano xvfb
-            sudo pecl install gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
 
       # Xvfb enables you to run graphical applications for browser tests
