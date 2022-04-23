@@ -14,7 +14,7 @@ jobs:
         auth:
           username: leymannx
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var
-      - image: cimg/mariadb:latest
+      - image: cimg/mariadb:10.6
         auth:
           username: leymannx
           password: $DOCKERHUB_PASSWORD
