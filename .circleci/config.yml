@@ -49,7 +49,11 @@ jobs:
           command: |
             sudo apt-get -qqy update && sudo apt-get -qqy upgrade
             sudo apt-get -qqy install libpng-dev libonig-dev mariadb-client nano xvfb
-            sudo apt-get -qqy install php7.4-{gd,mbstring,mysqli,pdo}
+            curl -sSLf \
+              -o /usr/local/bin/install-php-extensions \
+              https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
+              chmod +x /usr/local/bin/install-php-extensions && \
+            sudo install-php-extensions gd mbstring mysqli pdo pdo_mysql
             sudo service apache2 restart
 
       # Xvfb enables you to run graphical applications for browser tests
