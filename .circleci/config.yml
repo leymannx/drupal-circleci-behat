@@ -142,6 +142,10 @@ jobs:
       - store_artifacts:
           path: /tmp/selenium
 
+      - store_artifacts:
+          path: tests/behat/screenshots
+          destination: behat
+
   # Above commands all belong to the build step. Now comes the deploy step.
   # Which only gets reached when all tests passed.
   #

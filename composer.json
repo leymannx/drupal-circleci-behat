@@ -27,9 +27,10 @@
         "webflo/drupal-finder": "^1.2"
     },
     "require-dev": {
+        "drevops/behat-screenshot": "^1.1",
         "drupal/core-dev": "^9.1",
-        "zaporylie/composer-drupal-optimizations": "^1.2",
-        "drupal/drupal-extension": "^4.1"
+        "drupal/drupal-extension": "^4.1",
+        "zaporylie/composer-drupal-optimizations": "^1.2"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -38,7 +39,14 @@
     "prefer-stable": true,
     "config": {
         "discard-changes": true,
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/console-extend-plugin": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "zaporylie/composer-drupal-optimizations": true
+        }
     },
     "autoload": {
         "classmap": [
